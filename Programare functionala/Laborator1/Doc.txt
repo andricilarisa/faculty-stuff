@@ -1,0 +1,19 @@
+REPL
+TopLevel - (se refera la modul interactiv oferit de Haskell, both)
+
+:q-iesim din GHCi
+:help
+
+:l Nume.hs (incarcac scripul nostru)
+
+[IMP] In haskell toate functiile incep cu litera mica
+[IMP] 
+:t 42
+
+42 :: Numa a=>a
+
+Num a=> -(constringere de tip)
+	-(a mic trebuie sa fie un tip din clasa Num, ex int etc)
+
+Tema - o functie recursiva care calculeaza ridicacrea la putere  f x y = x^y
+     - o o functie recursiva care calculeaza suma primelor n numere impare

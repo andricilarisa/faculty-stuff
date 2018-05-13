@@ -1,0 +1,31 @@
+Tupluri
+Prelude>(True, 'a')
+(True, 'a')
+
+Functii pentru tupluri
+>fst ('a', True) - intoarce primul element din tuplu 
+FOARTEIMP- ('a',True) este un singur argument (intuitiv, un struct in C)
+>snd ('b',False) - intoarce al doilea argument
+
+------
+ Liste
+>[1,3,10,19,7] - exemplu lista
+>[] -lista vida
+>[1,2,3] ---- reprezentare interna 1:(2:(3:([])))
+[True,False] - lista de bool
+[1,2,3] - lista de Num
+
+Def: Prin definitie o lista de tip [a] este:
+- sau lista vida, notata "[]"
+-sau lista care incepe cu un element x::a si continua cu o lista l de tip l::[a], notata
+"x::l"
+
+TEMA
+-O funtie "punelasfarsit::a->[a]->[a]" obtinuta prin punerea la sfarsit a lui a 
+ex: pulelasfarsit 7 [1,2,3] si intoarce [1,2,3,7]
+-O functie care primeste [a]->a->Bool
+-O functie concatenare care primeste 2 liste de a micuri 
+-O functie care inverseaza o lista 1,2,3 intoarce 3,2,1
+-O functie la pozitie [a]->a->a si intoarce elementul de la pozitia a
+-Elem impar care primeste [a]->[a] si intoarce doar elementele impare 
+-Aceeasi functie care intoarce elementele de de pe pozitii impare

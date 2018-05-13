@@ -1,0 +1,5 @@
+Functii de ordin superior
+--pot prima ca argument alte functii
+
+Tema:
+-Scrieti echivalentul functiilor map, foldl si filter pentru listele definite de utilizator

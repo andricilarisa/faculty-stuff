@@ -1,0 +1,16 @@
+data Zi = Luni | Marti | .... | Dum deriving Show
+urm::Zi->Zi
+urm Luni=Marti
+
+deriving show--Pentru afisare
+
+Tema:
+-baza2 :: Nat->Lista' Int (o functie baza 2 care sa primeasca un Nat si sa intoarca o lista Lista' Int reprezentat reprezentarea in baza 2 a numarului natural 
+-azab2 :: Lista' Int -> Nat (primeste o lista reprezentat binarul unui numar si intoarce numarul)
+
+-data NatBinara = Zero | Unu | AUnu NatBinar | AZero NatBinar deriving Show
+-functii de conversii Nat->NatBinar
+		     NatBinar->Nat
+-add:NatBinar->NatBinar->NatBinar
+-proiectati un tip de date pentru arbori binari de cautare si faceti functia de insert, delete si cauta
+-transformati arborii binari de cautare in AVL sau RosuNegru  
