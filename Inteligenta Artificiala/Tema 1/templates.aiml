@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding = "ISO-8859-1"?>
+<aiml version="1.0">
+<category>
+<pattern>START</pattern>
+<template>Let's learn together. Say "Hei" to me in your language. Good luck and have patience with me.
+</template>
+</category>
+<category>
+  <pattern>BUNA</pattern>
+  <that>LET S LEARN TOGETHER SAY *</that>
+  <template>
+    Buna, ce faci?
+  </template>
+</category>
+<category>
+  <pattern>BINE</pattern>
+  <that>BUNA CE FACI</that>
+  <template>Cum te numesti?</template>
+</category>
+<category>
+  <pattern>BINE TU CE FACI</pattern>
+  <template>Bine. Cum te numesti?</template>
+</category>
+<category>
+<pattern>*</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+ <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MA NUMESC *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+<get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>SUNT *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>NUMELE MEU ESTE *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MY NAME IS *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>*</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+ <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MA NUMESC *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+<get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>SUNT *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>NUMELE MEU ESTE *</pattern>
+<that>* CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MY NAME IS *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+  <pattern>
+    SI EU MA BUCUR SA TE CUNOSC
+  </pattern>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU MA BUCUR SA TE CUNOSC *
+  </pattern>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU
+  </pattern>
+  <that>MA BUCUR SA TE CUNOSC *</that>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU
+  </pattern>
+  <that>MA BUCUR SA TE CUNOSC</that>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>* ANI</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  Oo, multi inainte. Si cu ce te ocupi?
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  Oo, multi inainte! Si cu ce te ocupi?
+  </template>
+</category>
+<category>
+  <pattern>AM * ANI</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  Oo, multi inainte! Si cu ce te ocupi?
+  </template>
+</category>
+<category>
+  <pattern>
+    *
+  </pattern>
+      <that>OO MULTI INAINTE SI CU CE TE OCUPI</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        Imi place cu ce te ocupi, foarte frumos!
+      </template>
+</category>
+<category>
+  <pattern>
+    SUNT *
+  </pattern>
+      <that>OO MULTI INAINTE SI CU CE TE OCUPI</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        Imi place cu ce te ocupi, foarte frumos!
+      </template>
+</category>
+<category>
+  <pattern>
+    MA OCUP CU *
+  </pattern>
+      <that>OO MULTI INAINTE SI CU CE TE OCUPI</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        Imi place cu ce te ocupi, foarte frumos!
+      </template>
+</category>
+<category>
+  <pattern>
+    CA SI PROFESIE SUNT *
+  </pattern>
+      <that>OO MULTI INAINTE SI CU CE TE OCUPI</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        Imi place cu ce te ocupi, foarte frumos!
+      </template>
+</category>
+<category>
+  <pattern>SI MIE</pattern>
+  <that>IMI PLACE CU CE TE OCUPI *</that>
+  <template>Nici nu ma gandeam ca nu ti-ar place, doar e ceea ce faci tu!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>BINE</pattern>
+  <that>NICI NU MA GANDEAM CA NU *</that>
+  <template>Buna prieten a/ul lui <get name="numeUser1"></get>
+  </template>
+</category>
+<category>
+  <pattern>BUNA</pattern>
+  <that>BUNA PRIETEN A *</that>
+  <template>Buna si tie. Cum te numesti?</template>
+  </category>
+  <category>
+    <pattern>*
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>EU SUNT *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>EU MA NUMESC *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>SUNT *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>MA NUMESC *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>
+      SUNT *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      Foarte frumos! Si cati ani ai?
+    </template>
+  </category>
+  <category>
+    <pattern>
+       *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      Foarte frumos! Si cati ani ai?
+    </template>
+  </category>
+  <category>
+    <pattern>
+       * ESTE PROFESIA MEA
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      Foarte frumos! Si cati ani ai?
+    </template>
+  </category>
+  <category>
+    <pattern>
+      AS PUTEA SPUNE CA SUNT *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      Foarte frumos! Si cati ani ai?
+    </template>
+  </category>
+  <category>
+    <pattern>
+      SUNT DOAR *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      Foarte frumos! Si cati ani ai?
+    </template>
+  </category>
+  <category>
+    <pattern>*
+    </pattern>
+    <that>FOARTE FRUMOS SI CATI ANI AI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+        Ce varsta deosebita! Nici nu mai am cuvinte! Ma bucur sa aflu atat de multe despre voi! Va place sa vorbiti cu mine?
+      </template>
+  </category>
+  <category>
+    <pattern>* ANI
+    </pattern>
+    <that>FOARTE FRUMOS SI CATI ANI AI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+        Ce varsta deosebita! Nici nu mai am cuvinte! Ma bucur sa aflu atat de multe despre voi! Va place sa vorbiti cu mine?
+      </template>
+  </category>
+  <category>
+    <pattern>AM * ANI
+    </pattern>
+    <that>FOARTE FRUMOS SI CATI ANI AI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+        Ce varsta deosebita! Nici nu mai am cuvinte! Ma bucur sa aflu atat de multe despre voi! Va place sa vorbiti cu mine?
+      </template>
+  </category>
+  <category>
+    <pattern>AM *
+    </pattern>
+    <that>FOARTE FRUMOS SI CATI ANI AI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+        Ce varsta deosebita! Nici nu mai am cuvinte! Ma bucur sa aflu atat de multe despre voi! Va place sa vorbiti cu mine?
+      </template>
+  </category>
+  <category>
+    <pattern>DA, NE PLACE
+    </pattern>
+    <that>CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser1"></get>, iti place sa citesti?
+   </template>
+  </category>
+  <category>
+    <pattern>DA *
+    </pattern>
+    <that>CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser1"></get>, iti place sa citesti?
+  </template>
+  </category>
+  <category>
+    <pattern>DA
+    </pattern>
+    <that>CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser1"></get>, iti place sa citesti?
+  </template>
+  </category>
+  <category>
+    <pattern>DA</pattern>
+    <that>* ITI PLACE SA CITESTI</that>
+    <template>
+    <think><set name="topic">carti</set></think>
+      Care a fost ultima ta carte citita?</template>
+  </category>
+
+  <topic name="carti">
+    <category>
+      <pattern>DA
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>*
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>DA *
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>*
+      </pattern>
+      <that>CARE A FOST ULTIMA TA CARTE CITITA</that>
+      <template>
+        Nu am auzit de ea, spune-mi mai multe!
+      </template>
+    </category>
+    <category>
+      <pattern>*</pattern>
+        <that>NU AM AUZIT DE EA SPUNE-MI MAI MULTE</that>
+        <template>Foarte interesant. ITi place sa mergi la lansari de carte? </template>
+    </category>
+    <category>
+      <pattern>DA
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Mai rar tanar ca tine!</li>
+       <li value="50">Ce frumos! Ai mers si in tinerete?</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>DA *
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Mai rar tanar ca tine!</li>
+       <li value="50">Ce frumos! Ai mers si in tinerete?</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>NU
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Ar trebui sa mergi, inveti lucruri noi, cunosti oameni noi..</li>
+       <li value="50">Ar trebui sa incerci sa mergi macar la o lansare in viata asta..</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>NU *
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Ar trebui sa mergi, inveti lucruri noi, cunosti oameni noi..</li>
+       <li value="50">Ar trebui sa incerci sa mergi macar la o lansare in viata asta..</li>
+      </condition>
+    </template>
+    </category>
+  </topic>
+</aiml>

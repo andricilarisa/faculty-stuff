@@ -1,0 +1,166 @@
+import pygame
+import os
+import time
+import bordInitialization
+
+display_width = 800
+display_height = 600
+
+white_square =  pygame.image.load(os.path.join("images", "white_square.png"))
+brown_square = pygame.image.load(os.path.join("images", "brown_square.png"))
+cyan_square = pygame.image.load(os.path.join("images", "cyan_square.png"))
+cyan_square = pygame.transform.scale(cyan_square, (40, 40))
+
+black_pawn =  pygame.image.load(os.path.join("images", "black_pawn.png"))
+black_pawn = pygame.transform.scale(black_pawn, (50, 50))
+white_pawn =  pygame.image.load(os.path.join("images", "white_pawn.png"))
+white_pawn = pygame.transform.scale(white_pawn, (50, 50))
+
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Pawn-Only Chess')
+
+def CreateRow(alternate, screenX, screenY):
+    for column in range(4):
+        if (alternate):
+            gameDisplay.blit(white_square, (screenX, screenY))
+            screenX = screenX + 50
+            gameDisplay.blit(brown_square, (screenX, screenY))
+            screenX = screenX + 50
+        else:
+            gameDisplay.blit(brown_square, (screenX, screenY))
+            screenX = screenX + 50
+            gameDisplay.blit(white_square, (screenX, screenY))
+            screenX = screenX + 50
+
+def PutPieces(chessBoard):
+    for row in range(8):
+        for column in range(8):
+            if chessBoard[row][column] == 1:
+                screenX = 200 + (column * 50)
+                screenY = 100 + (row * 50)
+                gameDisplay.blit(black_pawn, (screenX, screenY))
+            if chessBoard[row][column] == 2:
+                screenX = 200 + (column * 50)
+                screenY = 100 + (row * 50)
+                gameDisplay.blit(white_pawn, (screenX, screenY))
+
+def CreateChessBoard():
+    alternate = True
+    screenX = 200
+    screenY = 100
+    for row in range(8):
+        CreateRow(alternate, screenX, screenY)
+        screenY = screenY + 50
+        if (alternate):
+            alternate = False
+        else:
+            alternate = True
+
+def PrintValidMoves(chessBoard, screenX, screenY):
+    row, column = TransformScreenOnPoints(screenX, screenY)
+    screenX = screenX + 5
+    screenY = screenY + 5
+    screenY = screenY - 50
+
+    if(chessBoard[row - 1][column] == 0):
+        gameDisplay.blit(cyan_square, (screenX, screenY))
+
+    if (column > 0) and (chessBoard[row - 1][column - 1] == 1):
+        screenX = screenX - 50
+        gameDisplay.blit(cyan_square, (screenX, screenY))
+        gameDisplay.blit(black_pawn, (screenX - 5, screenY - 5))
+        screenX = screenX + 50
+
+    if (column < 7) and (chessBoard[row - 1][column + 1] == 1):
+        screenX = screenX + 50
+        gameDisplay.blit(cyan_square, (screenX, screenY))
+        gameDisplay.blit(black_pawn, (screenX - 5, screenY - 5))
+        screenX = screenX + 50
+
+    if (row == 6):
+        screenY = screenY - 50
+        gameDisplay.blit(cyan_square, (screenX, screenY))
+
+def IsValidMove(chessBoard, screenX, screenY):
+    column = int((screenX - 200) / 50)
+    row = int((screenY - 100) / 50)
+    if chessBoard[row][column] == 2:
+        return True
+    else:
+        return False
+
+def IsValidThisMove(chessBoard, row, column, newRow, newColumn):
+    if (row - newRow == 1) and (column == newColumn) and (chessBoard[newRow][newColumn] == 0):
+        return True
+    if (row - newRow == 2) and (column == newColumn) and (row == 6) and (chessBoard[newRow][newColumn] == 0):
+        return True
+    if newColumn < 8 and newColumn >= 0:
+        if (row == newRow + 1) and (column == newColumn + 1) and (chessBoard[newRow][newColumn] == 1):
+            return True
+    if newColumn >= 0 and newColumn < 8:
+        if (row == newRow + 1) and (column == newColumn - 1) and (chessBoard[newRow][newColumn] == 1):
+            return True
+    return False
+
+def TransformScreenOnPoints(screenX, screenY):
+    row = int((screenY - 100) / 50)
+    column = int((screenX - 200) / 50)
+    return row, column
+
+def TransformEventPosOnScreen(eventPos):
+    screenX = eventPos[0]
+    screenX = screenX - (screenX % 50)
+    screenY = eventPos[1]
+    screenY = screenY - (screenY % 50)
+    return screenX, screenY
+
+def ChessGui():
+    gameOver = False
+    chessBoard = bordInitialization.InitialState()
+    CreateChessBoard()
+    PutPieces(chessBoard)
+    playerWin = False
+    readyToMove = False
+    while (not gameOver):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gameOver = True
+            if (playerWin):
+                gameOver = True
+            if not readyToMove:
+                CreateChessBoard()
+                PutPieces(chessBoard)
+            if (event.type == pygame.MOUSEBUTTONDOWN) and (event.button == 1):
+                screenX, screenY = TransformEventPosOnScreen(event.pos)
+                if readyToMove:
+                    row, column = TransformScreenOnPoints(readyToMove[0], readyToMove[1])
+                    newRow, newColumn = TransformScreenOnPoints(screenX, screenY)
+
+                    if IsValidThisMove(chessBoard, row, column, newRow, newColumn):
+                        chessBoard[row][column] = 0
+                        chessBoard[newRow][newColumn] = 2
+                        playerWin = bordInitialization.FinalStates(chessBoard, "Player")
+                        if (playerWin):
+                            pygame.font.init()
+                            myfont = pygame.font.SysFont('Comic Sans MS', 30)
+                            textsurface = myfont.render('Felicitari! Ati resuit sa castigati acest meci.', False, (255, 255, 255))
+                            gameDisplay.blit(textsurface, (100, 10))
+                        readyToMove = False
+                    else:
+                        readyToMove = False
+                else:
+                    screenX, screenY = TransformEventPosOnScreen(event.pos)
+
+                    if IsValidMove(chessBoard, screenX, screenY):
+                        PrintValidMoves(chessBoard, screenX, screenY)
+                        readyToMove = (screenX, screenY)
+
+            pygame.display.update()
+            if(gameOver):
+                time.sleep(5)
+
+
+    pygame.quit()
+    quit()
+
+ChessGui()

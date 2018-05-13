@@ -1,0 +1,103 @@
+from random import randint
+import time
+n=3
+m=3
+flag=[]
+
+
+def moveTower(n,fromPole, toPole, withPole):
+    if n >= 1:
+
+        moveTower(n-1,fromPole,withPole,toPole)
+        moveDisk(n-1,fromPole,toPole)
+        moveTower(n-1,withPole,toPole,fromPole)
+
+def moveDisk(n,fp,tp):
+    print("moving disk from",fp,"to",tp)
+
+#moveTower(3,"A","C","B")
+
+
+
+def initial_state(n,m):
+    stare=[n]
+    for i in range(n):
+        stare.append(1)
+    return stare
+
+def final_state(stare):
+
+    return  stare[2:]==stare[1:-1] and stare[1]==stare[0]
+
+def valid_transition(stare,disc, rod):
+
+    # the disc is already on that rod
+    if(stare[disc]==rod):
+        return 0
+    #for each disc smaller that my disc
+    for i in range(1,disc):
+        #check if there are smaller discs on the same rod
+        if (stare[i]==stare[disc]):
+            return 0
+        #chech if there is another disc on the final rod
+        if (stare[i]==rod):
+            return 0
+
+    if transition(stare,disc,rod) in flag:
+        return 0
+    return 1
+
+def pick_state(stare):
+    disc=randint(1,n)
+    rod=randint(1,m)
+    return (disc,rod)
+
+def transition(stare, disc, rod):
+    aux_stare=stare
+    for i in range(1,n+1):
+        if (i==disc):
+            aux_stare[i]=rod
+    #print(aux_stare)
+    return aux_stare
+
+def strategy( stare ):
+
+    index=0
+    ok=0
+    solution_length=0
+    while(final_state(stare)!=1 and index<100):
+        #print("stare intrare:",stare)
+        index+=1
+        if index==100:
+            index=0
+            stare=stare_initiala
+
+        disc,rod=pick_state(stare)
+
+
+        if valid_transition(stare,disc,rod)==1:
+            #print("1")
+            solution_length+=1
+            if ok==0:
+                flag.append([3,1,1,1])
+                #print("1----",flag)
+                ok=1
+
+            #print(disc,rod)
+            stare=transition(stare,disc,rod)
+            print(flag)
+            #print(stare)
+            flag.append(list(stare))
+            # print(stare)
+            #print(flag)
+
+    return stare,index,solution_length
+
+stare_initiala=initial_state(n,m)
+benchmark = time.clock()
+final_stare=strategy(stare_initiala)
+benchmark = time.clock() - benchmark
+print("Final state:",final_stare[0])
+print("Solution length:", final_stare[-1])
+print("Time:",benchmark, "seconds")
+

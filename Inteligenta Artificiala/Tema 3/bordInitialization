@@ -1,0 +1,21 @@
+def InitialState():
+    chessBoard = [[0 for index in range(8)] for y in range(8)]
+    chessBoard[1] = [1 for index in range(8)]
+    chessBoard[6] = [2 for index in range(8)]
+    return chessBoard
+
+def FinalStates(chessBoard, player):
+    playerWin = True
+    for row in range(8):
+        for column in range(8):
+            if (player == "Player"):
+                if(chessBoard[row][column] == 1):
+                    playerWin = False
+                if (chessBoard[0][column] == 2):
+                    playerWin = True
+            if (player == "Robot"):
+                if(chessBoard[row][column] == 2):
+                    playerWin = False
+                if(chessBoard[7][column] == 1):
+                    playerWin = True
+    return playerWin

@@ -1,0 +1,112 @@
+import random
+import itertools
+
+
+def stare_finala(n, m, stare):
+    for i in range(m):
+        if stare[i] != n - 1:
+            return False
+    return True
+
+
+def validare_mutare(disc, tija, tije):
+    if tije[disc] == tija:
+        return False
+    for i in range(disc):
+        if tije[i] == tije[disc]:
+            return False
+        if tije[i] == tija:
+            return False
+    return True
+
+
+def muta_disc(disc, tija, stare):
+    stare[disc] = tija
+    return stare
+
+
+def alegere_random(n, m):
+    disc = random.randrange(1, m)
+    tija = random.randrange(1, n)
+    return disc, tija
+
+
+# n tije, m discuri
+def varianta_random(n, m):
+    stare = []
+    for i in range(n):
+        stare.append(0)
+    incercari = 0
+    history = []
+    while incercari <= 100:
+        disc = alegere_random(n, m)[0]
+        tija = alegere_random(n, m)[1]
+        stareAux = muta_disc(disc, tija, stare)
+        if (stareAux not in history):
+            history.append(stareAux)
+        stare = stareAux
+        if(stare in history):
+            while(stare not in history):
+                disc = alegere_random(n, m)[0]
+                tija = alegere_random(n, m)[1]
+            history.append(stare)
+        print(history)
+        if (validare_mutare(disc, tija, stare) and stare not in history):
+            stare = muta_disc(disc, tija, stare)
+            if stare_finala(n, m, stare):
+                print("Stare finala: ", stare)
+                print("Istoricul mutarilor: ", history)
+                return
+            incercari += 1
+        else:
+            incercari += 1
+
+
+varianta_random(3, 3)
+
+
+def a_star(n, m):
+    stare = []
+    numbers = []
+    for i in range(m):
+        stare.append(0)
+    for i in range(m):
+        numbers.append(i)
+    allPosibilities = []
+    # for subset in itertools.permutations(numbers, m):
+    #     y=[]
+    #     for i in subset:
+    #       y.append(i)
+    #     allPosibilities.append(y)
+    # for i in range(m):
+    #     x = []
+    #     for j in range(m):
+    #         x.append(i)
+    #     allPosibilities.append(x)
+
+    for subset in itertools.permutations(numbers, 2):
+        allPosibilities.append(subset)
+    for i in range(m):
+        allPosibilities.append((i,i))
+    costuri =[]
+    for subset in allPosibilities:
+        sum = 0
+        for i in range(len(subset)):
+            sum +=i
+        costuri.append(sum)
+    print(costuri)
+    print(allPosibilities)
+    for posibilitate in allPosibilities:
+        if(validare_mutare(posibilitate[0], posibilitate[1], stare)):
+            stare = muta_disc(posibilitate[0], posibilitate[1], stare)
+            print(stare)
+
+    # stari = []
+    # for pos in allPosibilities:
+    #     s = muta_disc(pos[0], pos[1], stare)
+    #     print(s)
+    # stari.append(s)
+    # print(stari)
+
+
+# a_star(3, 3)

@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding = "ISO-8859-1"?>
+<aiml version="1.0">
+<category>
+<pattern>START</pattern>
+<template>Let's learn together. Say "Hei" to me in your language. Good luck and have patience with me.
+</template>
+</category>
+<category>
+  <pattern>BUNA</pattern>
+  <that>LET S LEARN TOGETHER SAY *</that>
+  <template>
+    Buna, ce faci?
+  </template>
+</category>
+<category>
+  <pattern>BINE</pattern>
+  <that>BUNA CE FACI</that>
+  <template>Cum te numesti?</template>
+</category>
+<category>
+  <pattern>BINE TU CE FACI</pattern>
+  <template>Bine. Cum te numesti?</template>
+</category>
+<category>
+<pattern>*</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+ <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MA NUMESC *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+<get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>SUNT *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>NUMELE MEU ESTE *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MY NAME IS *</pattern>
+<that>CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>*</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+ <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MA NUMESC *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>Ma bucur sa te cunosc,
+<get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>SUNT *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>NUMELE MEU ESTE *</pattern>
+<that>* CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+<pattern>MY NAME IS *</pattern>
+<that> * CUM TE NUMESTI</that>
+<template><think><set name="numeUser1"><star/></set></think>
+Ma bucur sa te cunosc, <get name="numeUser1"></get>
+</template>
+</category>
+<category>
+  <pattern>
+    SI EU MA BUCUR SA TE CUNOSC
+  </pattern>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU MA BUCUR SA TE CUNOSC *
+  </pattern>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU
+  </pattern>
+  <that>MA BUCUR SA TE CUNOSC *</that>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>
+    SI EU
+  </pattern>
+  <that>MA BUCUR SA TE CUNOSC</that>
+  <template>
+    Cati ani ai?
+  </template>
+</category>
+<category>
+  <pattern>* ANI</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  <condition name="varstaUser1" value="50">
+  <random>
+  <li>Domnule <get name="numeUser1"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Auzi <get name="numeUser1"></get>, te simti ca in half-life? </li>
+  <li>Mai <get name="numeUser1"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea alege intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser1"></get>?</li>
+  <li>Cu asa o varsta, domnule <get name="numeUser1"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser1" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  <condition name="varstaUser1" value="50">
+  <random>
+  <li>Domnule <get name="numeUser1"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Auzi <get name="numeUser1"></get>, te simti ca in half-life? </li>
+  <li>Mai <get name="numeUser1"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea alege intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser1"></get>?</li>
+  <li>Cu asa o varsta, domnule <get name="numeUser1"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser1" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+</category>
+<category>
+  <pattern>AM * ANI</pattern>
+  <that>CATI ANI AI</that>
+  <template><think><set name="varstaUser1"><star/></set></think>
+  <condition name="varstaUser1" value="50">
+  <random>
+  <li>Deci, domnule <get name="numeUser1"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Wow...Auzi <get name="numeUser1"></get>, te simti ca in half-life? </li>
+  <li>Varstnicule, Mai <get name="numeUser1"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea alege intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser1"></get>?</li>
+  <li>Cu asa o varsta, domnule <get name="numeUser1"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser1" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+</category>
+<category>
+  <pattern>*
+  </pattern>
+  <that>IAUZI *</that>
+  <template>
+<think><set name="ocupatieUser1"><star/></set></think>
+    O ocupatie tare interesanta!</template>
+</category>
+<category>
+  <pattern>NIMIC *
+  </pattern>
+  <that>TINERETE TINERETE</that>
+  <template>Asta e trist</template>
+</category>
+<category>
+  <pattern>NIMIC
+  </pattern>
+  <that>TINERETE *</that>
+  <template>Asta e trist</template>
+</category>
+<category>
+  <pattern>*
+  </pattern>
+  <that>TINERETE TINERETE</that>
+  <template>Bravo, bravo!</template>
+</category>
+<category>
+  <pattern>*
+  </pattern>
+  <that> * CE VARSTA FRUMOASA</that>
+  <template>
+    <think><set name="ocupatieUser1"></set></think>
+     O sa ai un viitor frumos inseamna! Esti student?
+  </template>
+</category>
+<category>
+  <pattern>*
+  </pattern>
+  <that> O SA AI UN VIITOR FRUMOS INSEAMNA ESTI STUDENT</that>
+  <template>
+    <think><set name="ocupatieUser1">student</set></think>
+Sounds like fun!!
+  </template>
+</category>
+<category>
+  <pattern> *
+  </pattern>
+  <that>O SA AI UN VIITOR FRUMOS INSEAMNA*
+  </that>
+  <template>
+    Suna interesant.
+  </template>
+</category>
+<category>
+  <pattern> DA
+  </pattern>
+  <that>O SA AI UN VIITOR FRUMOS INSEAMNA*
+  </that>
+  <template>
+    Esti foarte explicit si amuzant tu astazi.
+  </template>
+</category>
+<category>
+  <pattern> DA *
+  </pattern>
+  <that>O SA AI UN VIITOR FRUMOS INSEAMNA*
+  </that>
+  <template>
+   Suna bine, sa ai grija sa nu iti irosesti timpul pretios.
+  </template>
+</category>
+<category>
+  <pattern> NU
+  </pattern>
+  <that>O SA AI UN VIITOR FRUMOS INSEAMNA*
+  </that>
+  <template>
+   Oh, asta suna destul de categoric si trist.
+  </template>
+</category>
+<category>
+  <pattern> NU *
+  </pattern>
+  <that>O SA AI UN VIITOR FRUMOS INSEAMNA*
+  </that>
+  <template>
+   Oh, asta suna destul de categoric si trist.
+  </template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>DECI DOMNULE *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>DOMNULE *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>WOW AUZI *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>VARSTNICULE MAI *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>DACA ATI ALEGE INTRE *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>CU ASA O VARSTA *</that>
+<template>Sigur ca da! Cu ce va ocupati la aceasta varsta?</template>
+</category>
+<category>
+  <pattern>
+    *
+  </pattern>
+      <that>SIGUR CA DA CU CE VA OCUPATI LA ACEASTA VARSTA</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        <condition name="ocupatieUser1" value="Profesor">
+		<random>
+		<li>Domnule <get name="numeUser1"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Auzi <get name="numeUser1"></get>, te iubesc studentii?</li>
+		<li>Mai <get name="numeUser1"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit ca nu sunteti asa bine platit, <get name="numeUser1"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor. Sunteti rari, nu-i asa,<get name="numeUser1"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser1" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+      </template>
+</category>
+<category>
+  <pattern>
+    SUNT *
+  </pattern>
+      <that>SIGUR CA DA CU CE VA OCUPATI LA ACEASTA VARSTA</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        <condition name="ocupatieUser1" value="Profesor">
+		<random>
+		<li>Domnule <get name="numeUser1"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Auzi <get name="numeUser1"></get>, te iubesc studentii?</li>
+		<li>Mai <get name="numeUser1"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit ca nu sunteti asa bine platit, <get name="numeUser1"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor. Sunteti rari, nu-i asa,<get name="numeUser1"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser1" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+      </template>
+</category>
+<category>
+  <pattern>
+    MA OCUP CU *
+  </pattern>
+      <that>SIGUR CA DA CU CE VA OCUPATI LA ACEASTA VARSTA</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        <condition name="ocupatieUser1" value="Profesor">
+		<random>
+		<li>Domnule <get name="numeUser1"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Auzi <get name="numeUser1"></get>, te iubesc studentii?</li>
+		<li>Mai <get name="numeUser1"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit ca nu sunteti asa bine platit, <get name="numeUser1"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor. Sunteti rari, nu-i asa,<get name="numeUser1"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser1" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+      </template>
+</category>
+<category>
+  <pattern>
+    CA SI PROFESIE SUNT *
+  </pattern>
+      <that>SIGUR CA DA CU CE VA OCUPATI LA ACEASTA VARSTA</that>
+      <template>
+        <think>
+          <set name="ocupatieUser1"><star/>
+          </set>
+        </think>
+        <condition name="ocupatieUser1" value="Profesor">
+		<random>
+		<li>Domnule <get name="numeUser1"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Auzi <get name="numeUser1"></get>, te iubesc studentii?</li>
+		<li>Mai <get name="numeUser1"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit ca nu sunteti asa bine platit, <get name="numeUser1"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor. Sunteti rari, nu-i asa,<get name="numeUser1"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser1" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+      </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>AUZI *</that>
+  <template>Interesant!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>MAI *</that>
+  <template>Interesant!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>AM AUZIT CA NU SUNTETI ASA BINE PLATIT *</that>
+  <template>Interesant!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>OHO DE MULT NU AM VORBIT CU UN PROFESOR *</that>
+  <template>Interesant!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>*</pattern>
+  <that>DOMNULE *</that>
+  <template>Interesant!
+    Hai acum lasa-ma sa vorbesc si cu prieten a/ul ta/tau!
+  </template>
+</category>
+<category>
+  <pattern>BINE</pattern>
+  <that>INTERESANT HAI ACUM LASA*</that>
+  <template>Buna prieten a/ul lui <get name="numeUser1"></get>
+  </template>
+</category>
+<category>
+  <pattern>BUNA</pattern>
+  <that>BUNA PRIETEN A *</that>
+  <template>Buna si tie. Cum te numesti?</template>
+  </category>
+  <category>
+    <pattern>*
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>EU SUNT *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>EU MA NUMESC *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>SUNT *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>MA NUMESC *
+    </pattern>
+        <that>BUNA SI TIE CUM TE NUMESTI</that>
+        <template><think>/<set name="numeUser2"><star/></set></think>
+        <get name="numeUser2"></get>, ce nume frumos! Tu cu ce te ocupi?
+        </template>
+  </category>
+  <category>
+    <pattern>
+      SUNT *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      <condition name="ocupatieUser2" value="Profesor">
+		<random>
+		<li>Asa ,domnule <get name="numeUser2"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Daca e asa... <get name="numeUser2"></get>, te iubesc studentii?</li>
+		<li>O mica curiozitate: <get name="numeUser2"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit,de la multi, ca nu sunteti asa bine platit, <get name="numeUser2"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor, cu nimeni, de altfel. Sunteti rari, nu-i asa,<get name="numeUser2"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser2" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+    </template>
+  </category>
+  <category>
+    <pattern>
+       *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+     <condition name="ocupatieUser2" value="Profesor">
+		<random>
+		<li>Asa ,domnule <get name="numeUser2"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Daca e asa... <get name="numeUser2"></get>, te iubesc studentii?</li>
+		<li>O mica curiozitate: <get name="numeUser2"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit,de la multi, ca nu sunteti asa bine platit, <get name="numeUser2"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor, cu nimeni, de altfel. Sunteti rari, nu-i asa,<get name="numeUser2"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser2" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+    </template>
+  </category>
+  <category>
+    <pattern>
+       * ESTE PROFESIA MEA
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      <condition name="ocupatieUser2" value="Profesor">
+		<random>
+		<li>Asa ,domnule <get name="numeUser2"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Daca e asa... <get name="numeUser2"></get>, te iubesc studentii?</li>
+		<li>O mica curiozitate: <get name="numeUser2"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit,de la multi, ca nu sunteti asa bine platit, <get name="numeUser2"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor, cu nimeni, de altfel. Sunteti rari, nu-i asa,<get name="numeUser2"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser2" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+    </template>
+  </category>
+  <category>
+    <pattern>
+      AS PUTEA SPUNE CA SUNT *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      <condition name="ocupatieUser2" value="Profesor">
+		<random>
+		<li>Asa ,domnule <get name="numeUser2"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Daca e asa... <get name="numeUser2"></get>, te iubesc studentii?</li>
+		<li>O mica curiozitate: <get name="numeUser2"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit,de la multi, ca nu sunteti asa bine platit, <get name="numeUser2"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor, cu nimeni, de altfel. Sunteti rari, nu-i asa,<get name="numeUser2"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser2" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+    </template>
+  </category>
+  <category>
+    <pattern>
+      SUNT DOAR *
+    </pattern>
+    <that>* CE NUME FRUMOS TU CU CE TE OCUPI </that>
+    <template>
+      <think><set name="ocupatieUser2"><star/></set></think>
+      <condition name="ocupatieUser2" value="Profesor">
+		<random>
+		<li>Asa ,domnule <get name="numeUser2"></get>, fiind profesor, spuneti-mi: diacriticile chiar conteaza?</li>
+		<li>Daca e asa... <get name="numeUser2"></get>, te iubesc studentii?</li>
+		<li>O mica curiozitate: <get name="numeUser2"></get>, intre ML si SI, ce curs ati rep-...preda?</li>
+		<li>Am auzit,de la multi, ca nu sunteti asa bine platit, <get name="numeUser2"></get>, e adevarat?</li>
+		<li>Oho, de mult nu am vorbit cu un Profesor, cu nimeni, de altfel. Sunteti rari, nu-i asa,<get name="numeUser2"></get>?</li>
+		</random>
+		</condition>
+		<condition name="ocupatieUser2" value="Student">
+		<random>
+		<li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+	  <li></li>
+		</random>
+		</condition>
+    </template>
+  </category>
+  <category>
+<pattern> * </pattern>
+<that>ASA DOMNULE *</that>
+<template>Sigur ca da! Deci lucrati! Dar ce varsta aveti?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>DACA E ASA * *</that>
+<template>Sigur ca da! Deci lucrati! Dar ce varsta aveti?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>O MICA CURIOZITATE *</that>
+<template>Sigur ca da! Deci lucrati! Dar ce varsta aveti?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>AM AUZIT DE LA MULTI CA NU SUNTETI ASA BINE PLATIT *</that>
+<template>Sigur ca da! Deci lucrati! Dar ce varsta aveti?</template>
+</category>
+<category>
+<pattern> * </pattern>
+<that>OHO DE MULT NU AM VORBIT CU UN PROFESOR CU NIMENI*</that>
+<template>Sigur ca da! Deci lucrati! Dar ce varsta aveti?</template>
+</category>
+<category>
+  <pattern>* ANI</pattern>
+  <that>SIGUR CA DA DECI LUCRATI DAR CE VARSTA AVETI</that>
+  <template><think><set name="varstaUser2"><star/></set></think>
+  <condition name="varstaUser2" value="50">
+  <random>
+  <li>Ghinion, domnule <get name="numeUser2"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Sunt curios <get name="numeUser2"></get>, te simti ca in half-life? </li>
+  <li>Dar daca ati avea de ales <get name="numeUser2"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea sa alegeti intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser2"></get>?</li>
+  <li>Cu o astfel de varsta, domnule <get name="numeUser2"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser2" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+</category>
+  <category>
+    <pattern>*
+    </pattern>
+    <that>SIGUR CA DA DECI LUCRATI DAR CE VARSTA AVETI</that>
+  <template><think><set name="varstaUser2"><star/></set></think>
+  <condition name="varstaUser2" value="50">
+  <random>
+  <li>Ghinion, domnule <get name="numeUser2"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Sunt curios <get name="numeUser2"></get>, te simti ca in half-life? </li>
+  <li>Dar daca ati avea de ales <get name="numeUser2"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea sa alegeti intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser2"></get>?</li>
+  <li>Cu o astfel de varsta, domnule <get name="numeUser2"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser2" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+      </template>
+  </category>
+  <category>
+    <pattern>* ANI
+    </pattern>
+    <that>SIGUR CA DA DECI LUCRATI DAR CE VARSTA AVETI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+  <condition name="varstaUser2" value="50">
+  <random>
+  <li>Ghinion, domnule <get name="numeUser2"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Sunt curios <get name="numeUser2"></get>, te simti ca in half-life? </li>
+  <li>Dar daca ati avea de ales <get name="numeUser2"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea sa alegeti intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser2"></get>?</li>
+  <li>Cu o astfel de varsta, domnule <get name="numeUser2"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser2" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+  </category>
+  <category>
+    <pattern>AM * ANI
+    </pattern>
+    <that>SIGUR CA DA DECI LUCRATI DAR CE VARSTA AVETI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+  <condition name="varstaUser2" value="50">
+  <random>
+  <li>Ghinion, domnule <get name="numeUser2"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Sunt curios <get name="numeUser2"></get>, te simti ca in half-life? </li>
+  <li>Dar daca ati avea de ales <get name="numeUser2"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea sa alegeti intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser2"></get>?</li>
+  <li>Cu o astfel de varsta, domnule <get name="numeUser2"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser2" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition>
+  </template>
+  </category>
+  <category>
+    <pattern>AM *
+    </pattern>
+    <that>SIGUR CA DA DECI LUCRATI DAR CE VARSTA AVETI</that>
+      <template><think><set name="varstaUser2"><star/></set></think>
+  <condition name="varstaUser2" value="50">
+  <random>
+  <li>Ghinion, domnule <get name="numeUser2"></get>, daca aveti noroc, prindeti pensia.</li>
+  <li>Sunt curios <get name="numeUser2"></get>, te simti ca in half-life? </li>
+  <li>Dar daca ati avea de ales <get name="numeUser2"></get>, intre dragnea si ponta, pe care PSD-ist ati vota?</li>
+  <li>Daca ati putea sa alegeti intre o varsta de pensionare scazuta si o pensie marita, cu cat v-ati mari pensia, <get name="numeUser2"></get>?</li>
+  <li>Cu o astfel de varsta, domnule <get name="numeUser2"></get>, probabil aveti multa experienta, nu?</li>
+  </random>
+  </condition>
+  <condition name="varstaUser2" value="21">
+  <random>
+    <li>Oo, ce varsta frumoasa! <get name="numeUser1"></get>, la ce facultate esti?</li>
+    <li>Tinerete, tinerete. <get name="numeUser1"></get>, ce iti place sa faci in timpul liber? </li>
+    <li>Ce ani frumosi! <get name="numeUser1"></get>, ai multi prieteni?</li>
+    <li>Iauzi, frumos! <get name="numeUser1"></get>, cu ce te ocupi?</li>
+  </random>
+  </condition></template>
+  </category>
+  <category>
+  <pattern> * </pattern>
+  <that>GHINION DOMNULE</that>
+  <template>Intradevar! Ce varsta deosebita...V-a placut sa vorbit cu mine?</template>
+  </category>
+
+  <category>
+  <pattern> * </pattern>
+  <that>SUNT CURIOS *</that>
+  <template>Intradevar! Ce varsta deosebita...V-a placut sa vorbit cu mine?</template>
+  </category>
+
+  <category>
+  <pattern> * </pattern>
+  <that>DAR DACA ATI AVEA DE ALES*</that>
+  <template>Intradevar! Ce varsta deosebita...V-a placut sa vorbit cu mine?</template>
+  </category>
+
+  <category>
+  <pattern> * </pattern>
+  <that>DACA ATI PUTEA SA ALEGETRI INTRE O VARSTA DE *</that>
+  <template>Intradevar! Ce varsta deosebita...V-a placut sa vorbit cu mine?</template>
+  </category>
+
+  <category>
+  <pattern> * </pattern>
+  <that>CU O ASTFEL DE VARSTA *</that>
+  <template>Intradevar! Ce varsta deosebita...V-a placut sa vorbit cu mine?</template>
+  </category>
+  <category>
+    <pattern>DA, NE-A PLACUT
+    </pattern>
+    <that>INTRADEVAR CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser2"></get>, iti place sa citesti?
+   </template>
+  </category>
+  <category>
+    <pattern>DA *
+    </pattern>
+    <that>INTRADEVAR CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser2"></get>, iti place sa citesti?
+  </template>
+  </category>
+  <category>
+    <pattern>DA
+    </pattern>
+    <that>INTRADEVAR CE VARSTA DEOSEBITA *</that>
+    <template>
+      <think><set name="topic">carti</set></think>
+      Ma bucur! <get name="numeUser2"></get>, iti place sa citesti?
+  </template>
+  </category>
+  <category>
+    <pattern>DA</pattern>
+    <that>* ITI PLACE SA CITESTI</that>
+    <template>
+    <think><set name="topic">carti</set></think>
+      Care a fost ultima ta carte citita?</template>
+  </category>
+  <topic name="carti">
+    <category>
+      <pattern>DA
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>*
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>DA *
+      </pattern>
+      <template>
+        Care a fost ultima ta carte citita?
+      </template>
+    </category>
+    <category>
+      <pattern>*
+      </pattern>
+      <that>CARE A FOST ULTIMA TA CARTE CITITA</that>
+      <template>
+        Nu am auzit de ea, spune-mi mai multe!
+      </template>
+    </category>
+    <category>
+      <pattern>*</pattern>
+        <that>NU AM AUZIT DE EA SPUNE-MI MAI MULTE</that>
+        <template>Foarte interesant. ITi place sa mergi la lansari de carte? </template>
+    </category>
+    <category>
+      <pattern>DA
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Mai rar tanar ca tine!</li>
+       <li value="50">Ce frumos! Ai mers si in tinerete?</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>DA *
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Mai rar tanar ca tine!</li>
+       <li value="50">Ce frumos! Ai mers si in tinerete?</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>NU
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Ar trebui sa mergi, inveti lucruri noi, cunosti oameni noi..</li>
+       <li value="50">Ar trebui sa incerci sa mergi macar la o lansare in viata asta..</li>
+      </condition>
+    </template>
+    </category>
+    <category>
+      <pattern>NU *
+      </pattern>
+      <that>FOARTE INTERESANT ITI PLACE SA MERGI LA LANSARI DE CARTE</that>
+      <template>
+      <condition name="varstaUser1">
+       <li value="21">Ar trebui sa mergi, inveti lucruri noi, cunosti oameni noi..</li>
+       <li value="50">Ar trebui sa incerci sa mergi macar la o lansare in viata asta..</li>
+      </condition>
+    </template>
+    </category>
+  </topic>
+  <category>
+<pattern>*
+</pattern>
+<template>Nu stiu ce vrei de la mine.
+</template>
+  </category>
+</aiml>

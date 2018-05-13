@@ -1,0 +1,28 @@
+
+import re
+
+def main():
+    cuvinte= []
+    f= open("cuvinte.txt", "r")
+    for line in f.read().splitlines():
+        cuvinte.append(line)
+    for i in range(len(cuvinte)):
+        cuvinte[i].replace("\n", "11")
+    print(cuvinte)
+    f.close()
+    text = open("text.txt", "r")
+    split_sentences = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)(\s|[A-Z].*)', text.read())
+    with open("output.txt", "w") as g:
+        for s in split_sentences:
+            print(s)
+            for cuvant in cuvinte:
+                spatiu = s.split(' ')
+                for i in range(len(spatiu)):
+                    if cuvant == spatiu[i] and i < len(spatiu) - 1:
+                        if spatiu[i + 1] == 'este':
+                            g.write(s)
+                            g.write('\n')
+
+main()
+
+
