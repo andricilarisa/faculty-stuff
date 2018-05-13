@@ -1,0 +1,8 @@
+Pentru exercitiul 3 am creat un index astfel:
+
+creat index ID on answers(user_id, solved);
+
+cu ajutorul caruia am luat toate valorile din tabela si le-am verificat;
+am sters limitarea id intre 120 si 140 si am rulat;
+
+Ruleaza ca si timp in jur de 8-9 secunde;
