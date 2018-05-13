@@ -1,0 +1,253 @@
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <errno.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <netdb.h>
+#include <string.h>
+#include <arpa/inet.h>
+
+extern int errno;
+
+/* portul de conectare la server*/
+int port;
+char buf[1001];
+int acces;
+
+int Option(int sd){
+  int nr=-1;
+    printf("%s","Top Music \n1.Log-in \n2.Creare cont \n3.Exit \n");
+  fflush (stdout);
+
+  scanf("%d",&nr);
+    
+  if (write (sd,&nr,sizeof(int)) <= 0){
+    perror ("[client]Eroare la write() \n");
+    return errno;
+  }
+  if(read(sd,&nr,sizeof(int))<=0){
+    perror("Eroare la read de la server\n");
+    return -1;
+  }
+return nr;
+}
+
+
+int main (int argc, char *argv[])
+{
+  int sd;     // descriptorul de socket
+  struct sockaddr_in server;  // structura folosita pentru conectare
+  int nr,succes;
+  /* exista toate argumentele in linia de comanda? */
+  if (argc != 3){
+      printf ("Sintaxa: %s <adresa_server> <port>\n", argv[0]);
+      return -1;
+    }
+  /* stabilim portul */
+  port = atoi (argv[2]);
+  /* cream socketul */
+  if ((sd = socket (AF_INET, SOCK_STREAM, 0)) == -1){
+  perror ("Eroare la socket().\n");
+  return errno;
+  }
+  /* umplem structura folosita pentru realizarea conexiunii cu serverul */
+  /* familia socket-ului */
+  server.sin_family = AF_INET;
+  /* adresa IP a serverului */
+  server.sin_addr.s_addr = inet_addr(argv[1]);
+  /* portul de conectare */
+  server.sin_port = htons (port);
+  /* ne conectam la server */
+  if (connect (sd, (struct sockaddr *) &server,sizeof (struct sockaddr)) == -1){
+      perror ("[client]Eroare la connect().\n");
+      return errno;
+    }
+    fflush (stdout);
+while(1)
+{
+	int option=0;
+	while(option!=1 && option!=2 && option!= 3)
+	{
+		option=Option(sd);
+		if (option==-1){
+			close (sd);
+			 printf("%s","Disconected \n");
+			  return 0;
+		  }
+		  if (option!=1 && option!=2 && option!=3){
+
+			  printf("%s","Ai introdus optiune gresita. Incearca din nou. \n");
+		}
+	}
+	if(option==1) //log-in
+	{
+		char username[45] ="";
+		char password[45] ="";
+		printf("%s", "\nUsername: ");
+		fflush (stdout);
+		scanf("%s", username);
+		if (write (sd,username,45) <= 0){
+			perror ("[client]Eroare la write() \n");
+			return errno;
+		}
+		printf("%s", "\nPassword: ");
+		fflush (stdout);
+		scanf("%s", password);
+		if (write (sd,password,45) <= 0){
+			perror ("[client]Eroare la write() \n");
+			return errno;
+		}
+		int usernameAlreadyExists=0;
+		if(read(sd,&usernameAlreadyExists,sizeof(int))<=0){
+			perror("Eroare la read de la server\n");
+			return -1;
+		}
+		if(usernameAlreadyExists==0)
+		{
+			printf("%s", "\nLogged in\n"); fflush(stdout);
+			int acces = 0;
+			if(read(sd,&acces,sizeof(int))<=0){
+				perror("Eroare la read de la server\n");
+				return -1;
+			}
+			if(acces==1) // admin
+			{
+				while(1)
+					{
+						int adminOption = 0;
+						printf("%s", "Admin menu\n1.Add song\n2.Delete song\n3.Add user\n4.Delete user"); fflush(stdout);
+						scanf("%d", &adminOption);
+						if (write (sd,&adminOption,sizeof(int)) <= 0){
+							perror ("[client]Eroare la write() \n");
+							return errno;
+						}
+						if(adminOption == 1)
+						{
+							char songName[45] = "";
+							char description[45] = "";
+							char link[45] = "";
+							fflush(stdout); printf("%s", "Enter the song name: ");
+							scanf("%s", songName);
+							fflush(stdout); printf("%s", "Enter a description: ");
+							scanf("%s", description);
+							fflush(stdout); printf("%s", "Enter the song link: ");
+							scanf("%s", link);
+							if (write (sd,songName,45) <= 0){
+								perror ("[client]Eroare la write() \n");
+								return errno;
+							}
+							if (write (sd,description,45) <= 0){
+								perror ("[client]Eroare la write() \n");
+								return errno;
+							}
+							if (write (sd,link,45) <= 0){
+								perror ("[client]Eroare la write() \n");
+								return errno;
+							}
+							int success = 0;
+							if(read(sd,&success,sizeof(int))<=0){
+								perror("Eroare la read de la server\n");
+								return -1;
+							}
+						if(success ==1){
+							fflush(stdout); printf("%s", "Done"); 
+						}else{
+							fflush(stdout); printf("%s", "Error. Try again."); 
+						}
+
+					}
+						
+					}
+			}
+			else{
+				if(acces==2){ // usual
+					while(1)
+					{
+						int usualOption =0;
+						printf("%s", "Usual menu\n1.All songs\n2.Songs by category\n3.Vote song\n4.Exit"); fflush(stdout);
+						scanf("%d", &usualOption);
+						if (write (sd,&usualOption,sizeof(int)) <= 0){
+							perror ("[client]Eroare la write() \n");
+							return errno;
+						}
+						if(usualOption == 1)
+						{
+							char text[1001] ="";
+							if(read(sd,text,1001)<=0){
+								perror("Eroare la read de la server\n");
+								return -1;
+							}
+							printf("%s", text);
+						}
+					}
+				}
+			}
+		}
+		else{
+			printf("%s", "\nUsername or password incorect\n");
+		}
+
+	}
+	if(option==2)//register
+	{
+		char username[45] ="";
+		char password[45] ="";
+		char repeatPassword[45]="";
+		printf("%s", "\nUsername: ");
+		fflush (stdout);
+		scanf("%s", username);
+		if (write (sd,username,45) <= 0){
+			perror ("[client]Eroare la write() \n");
+			return errno;
+		}
+		printf("%s", "\nPassword: ");
+		fflush (stdout);
+		scanf("%s", password);
+		if (write (sd,password,45) <= 0){
+			perror ("[client]Eroare la write() \n");
+			return errno;
+		}
+		printf("%s", "\nRepeat your password: ");
+		fflush (stdout);
+		scanf("%s", repeatPassword);
+		if (write (sd,repeatPassword,45) <= 0){
+			perror ("[client]Eroare la write() \n");
+			return errno;
+		}
+		if(strcmp(password, repeatPassword) == 0)
+		{
+			int usernameAlreadyExists=0;
+			if(read(sd,&usernameAlreadyExists,sizeof(int))<=0){
+				perror("Eroare la read de la server\n");
+				return -1;
+			}
+			if(usernameAlreadyExists == 0)
+			{
+				fflush(stdout);
+				printf("%s", "\nUser added \n");
+				fflush(stdout);
+			}
+			else{
+				printf("%s", "\nUsername already exists \n");
+				fflush(stdout);
+			}
+		}
+		else
+		{
+			printf("%s", "\nPassword don't match. ");
+			fflush (stdout);
+		}
+	}
+	if(option==3)
+	{
+		close(sd);
+		printf("%s","Disconecting... \n");
+		return 0;
+	}
+	
+}
+}
+

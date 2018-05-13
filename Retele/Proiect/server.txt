@@ -1,0 +1,443 @@
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <errno.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <pthread.h>
+#include <sqlite3.h>
+
+#define PORT 3000
+extern int errno;
+
+char text2[1001] ="";
+
+typedef struct thData{
+    int idThread; //id-ul thread-ului tinut in evidenta de acest program
+    int cl; //descriptorul intors de accept
+}thData;
+
+
+static int insert(void *NotUsed, int argc, char **argv, char **azColName){
+   return 0;
+}
+static int exists_y_n(void *data,int argc, char **argv, char **azColName){
+    if (argv==NULL)  
+        return 0;
+    else    
+        return 1;
+}
+int callback(void *NotUsed, int argc, char **argv, 
+                    char **azColName) {
+    
+    NotUsed = 0;
+    for (int i = 0; i < argc; i++) {
+ strcat(text2, azColName[i]); strcat(text2, " : "); strcat(text2, argv[i]); strcat(text2, "\n");
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    
+    printf("\n");
+    
+    return 0;
+}
+static int pick_a_number(void *data,int argc, char **argv, char **azColName)
+{
+      if (argv==NULL)
+    {
+        *(int*)data=0;
+        return 0;
+    }
+      else
+    {
+        *(int*)data=atoi(argv[0]);
+        return 4;
+    }
+}
+
+static int product_name(void *data,int argc, char **argv, char **azColName)
+{
+    data=argv[1];
+    return 0;
+}
+
+
+static void *cumparator(void * arg)
+{
+    char array[500]="";
+    int nr,rc;
+    pthread_detach(pthread_self());
+	struct sqlite3_stmt *selectstmt;
+    struct thData tdL;
+    tdL= *((struct thData*)arg);
+    sqlite3 *db;
+    char *zErrMsg = 0;
+    char sql[100];
+    fflush (stdout);
+    rc = sqlite3_open_v2("test.db", &db,SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX,NULL);
+    if(rc)
+    {
+        printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+          perror("Eroare la baza de date \n");
+          exit(0);
+    }
+    else
+    {
+          printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+        printf("Baza de date deschisa \n");
+    }
+while(1)
+{     
+
+int option=0;
+while(option!=1 && option!=2 && option!=3)
+{
+if (read (tdL.cl, &option ,sizeof(int)) <= 0)
+                {
+                    printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+                      perror("Eroare la read() \n");
+                    close (((struct thData*)arg)->cl);
+                    return(NULL);
+                   }
+
+
+if(write(tdL.cl,&option, sizeof(int))<=0)
+            {
+                printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+                  perror("Eroare la write() \n");
+                close (((struct thData*)arg)->cl);
+                return(NULL);
+            }
+}
+if(option==1) //login
+{
+	char username[45] ="";
+	char password[45] = "";
+	if (read (tdL.cl, username ,45) <= 0)
+	{
+		printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+		perror("Eroare la read() \n");
+		close (((struct thData*)arg)->cl);
+		return(NULL);
+	}
+	if (read (tdL.cl, password ,45) <= 0)
+	{
+		printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+		perror("Eroare la read() \n");
+		close (((struct thData*)arg)->cl);
+		return(NULL);
+	}
+	strcpy(sql, "");
+	strcpy(sql, "select * from Users where username = ? and password = ?");
+	printf("%s %s", username, password);fflush(stdout);
+	int result = sqlite3_prepare_v2(db, sql, -1, &selectstmt, NULL);
+	if(result == SQLITE_OK)
+	{
+		sqlite3_bind_text(selectstmt, 1, username, strlen(username), SQLITE_STATIC);
+		sqlite3_bind_text(selectstmt, 2, password, strlen(password), SQLITE_STATIC);
+		if (sqlite3_step(selectstmt) == SQLITE_ROW)
+		{
+			int succes =0;
+			if(write(tdL.cl,&succes, sizeof(int))<=0)
+			{
+				printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+				perror("Eroare la write() \n");
+				close (((struct thData*)arg)->cl);
+				return(NULL);
+			}
+			int acces =sqlite3_column_int(selectstmt, 3);
+
+			//strcpy(acces, sqlite3_column_int(selectstmt, 3));
+			if(write(tdL.cl,&acces, sizeof(int))<=0)
+			{
+				printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+				perror("Eroare la write() \n");
+				close (((struct thData*)arg)->cl);
+				return(NULL);				
+			}
+			sqlite3_finalize(selectstmt);
+			if(acces==1) //admin
+			{
+				while(1)
+				{
+					int adminOption = 0;
+					if (read (tdL.cl, &adminOption ,sizeof(int)) <= 0)
+					{
+						printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+						perror("Eroare la read() \n");
+						close (((struct thData*)arg)->cl);
+						return(NULL);
+					}
+					if(adminOption == 1)
+					{
+						char songName[45] = "";
+						char description[45] = "";
+						char link[45] = "";
+						if (read (tdL.cl, songName ,45) <= 0)
+						{
+							printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+							perror("Eroare la read() \n");
+							close (((struct thData*)arg)->cl);
+							return(NULL);
+						}
+						if (read (tdL.cl, description ,45) <= 0)
+						{
+							printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+							perror("Eroare la read() \n");
+							close (((struct thData*)arg)->cl);
+							return(NULL);
+						}
+						if (read (tdL.cl, link ,45) <= 0)
+						{
+							printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+							perror("Eroare la read() \n");
+							close (((struct thData*)arg)->cl);
+							return(NULL);
+						}
+						strcpy(sql, "");
+						strcpy(sql, "insert into Music(name, description, votes, link) values(?, ?, 0, ?)");
+						int resultInsert = sqlite3_prepare_v2(db, sql, -1, &selectstmt, NULL);
+						if(result == SQLITE_OK)
+						{
+							sqlite3_bind_text(selectstmt, 1, songName, strlen(songName), SQLITE_STATIC);
+							sqlite3_bind_text(selectstmt, 2, description, strlen(description), SQLITE_STATIC);
+							sqlite3_bind_text(selectstmt, 3, link, strlen(link), SQLITE_STATIC);
+							if (sqlite3_step(selectstmt) == SQLITE_DONE)
+							{
+								int success = 1;
+								if(write(tdL.cl,&success, sizeof(int))<=0)
+								{
+									printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+									perror("Eroare la write() \n");
+									close (((struct thData*)arg)->cl);
+									return(NULL);				
+								}
+								sqlite3_finalize(selectstmt);
+							}else{
+								int success = 0;
+								if(write(tdL.cl,&success, sizeof(int))<=0)
+								{
+									printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+									perror("Eroare la write() \n");
+									close (((struct thData*)arg)->cl);
+									return(NULL);				
+								}
+								sqlite3_finalize(selectstmt);
+							}	
+						}
+					}
+				}
+			}else{if(acces==2){ //usual
+				while(1)
+				{
+					int usualOption = 0;
+					if (read (tdL.cl, &usualOption ,sizeof(int)) <= 0)
+					{
+						printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+						perror("Eroare la read() \n");
+						close (((struct thData*)arg)->cl);
+						return(NULL);
+					}
+					fflush(stdout); printf("%d", usualOption); fflush(stdout);
+					if(usualOption == 1){
+						strcpy(sql, "");
+						strcpy(sql, "select * from Music");
+						rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+						if(result == SQLITE_OK)
+						{
+
+
+							while(1==2)
+							{
+								
+							}
+							//sqlite3_finalize(selectstmt);
+							if(write(tdL.cl,text2, 1001)<=0)
+							{
+								printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+								perror("Eroare la write() \n");
+								close (((struct thData*)arg)->cl);
+								return(NULL);				
+							}
+						}
+						
+					}
+				}
+			}}
+		}
+		else{
+			int succes=1;
+			if(write(tdL.cl,&succes, sizeof(int))<=0)
+			{
+				printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+				perror("Eroare la write() \n");
+				close (((struct thData*)arg)->cl);
+				return(NULL);
+				printf("%s", sqlite3_column_text(selectstmt, 3));
+				fflush(stdout);
+			}
+		}
+	}
+		
+}
+if(option==2)
+{
+	fflush (stdout);
+	printf("%s", "\nCreating account..: ");
+	fflush (stdout);
+	printf("%s", "\nReading username..: ");
+	fflush (stdout);
+	char username[45] ="";
+	char password[45] ="";
+	char repeatPassword[45]="";
+	if (read (tdL.cl, username ,45) <= 0)
+	{
+		printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+		perror("Eroare la read() \n");
+		close (((struct thData*)arg)->cl);
+		return(NULL);
+	}
+	printf("\nUsername read: %s", username);
+	fflush (stdout);
+	if (read (tdL.cl, password ,45) <= 0)
+	{
+		printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+		perror("Eroare la read() \n");
+		close (((struct thData*)arg)->cl);
+		return(NULL);
+	}
+	printf("\nPassword read: %s", password);
+	fflush (stdout);
+	if (read (tdL.cl, repeatPassword ,45) <= 0)
+	{
+		printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+		perror("Eroare la read() \n");
+		close (((struct thData*)arg)->cl);
+		return(NULL);
+	}
+	printf("\nrepeatPassword read: %s", repeatPassword);
+	fflush (stdout);
+	if(strcmp(password, repeatPassword) == 0)
+	{
+		strcpy(sql, "");
+		strcpy(sql, "select * from Users where username = ?");
+
+		    int result = sqlite3_prepare_v2(db, sql, -1, &selectstmt, NULL);
+		    if(result == SQLITE_OK)
+		    {
+			sqlite3_bind_text(selectstmt, 1, username, strlen(username), SQLITE_STATIC);
+		       if (sqlite3_step(selectstmt) == SQLITE_ROW)
+		       {
+				int err=1;
+				if(write(tdL.cl,&err, sizeof(int))<=0)
+				{
+					printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+					perror("Eroare la write() \n");
+					close (((struct thData*)arg)->cl);
+					return(NULL);
+				}
+				sqlite3_finalize(selectstmt);
+		       }
+		       else
+		       {
+				int err=0;
+				if(write(tdL.cl,&err, sizeof(int))<=0)
+				{
+					printf("[server][Thread: %d][Descriptor client: %d]", tdL.idThread, tdL.cl);
+					perror("Eroare la write() \n");
+					close (((struct thData*)arg)->cl);
+					return(NULL);
+				}
+				strcpy(sql, "");
+				strcpy(sql, "insert into Users(username, password, acces) values(?, ?, 1);");
+				
+				int result2 = sqlite3_prepare_v2(db, sql, -1, &selectstmt, NULL);
+				if(result == SQLITE_OK)
+				{
+					sqlite3_bind_text(selectstmt, 1, username, strlen(username), SQLITE_STATIC);
+					sqlite3_bind_text(selectstmt, 2, password, strlen(password), SQLITE_STATIC);
+				}
+				
+				  if (sqlite3_step(selectstmt) != SQLITE_DONE) {
+				    printf("\nCould not step (execute) stmt.\n");
+				    
+				  }
+				sqlite3_finalize(selectstmt);
+		       }
+		    }else{
+			printf("%s", "err"); fflush(stdout);
+			}
+	}
+}
+if(option==3)
+{
+	close (((struct thData*)arg)->cl);
+	return(NULL);
+}
+
+}
+}
+
+
+
+int main ()
+{
+  struct sockaddr_in server;    // structura folosita de server
+  struct sockaddr_in from;
+  int sd;        //descriptorul de socket
+  pthread_t *th=NULL;    //Identificatorii thread-urilor care se vor crea
+  int i=0;
+
+  /* crearea unui socket */
+  if ((sd = socket (AF_INET, SOCK_STREAM, 0)) == -1){
+      perror ("[server]Eroare la socket().\n");
+      return errno;
+    }
+  /* utilizarea optiunii SO_REUSEADDR */
+  int on=1;
+  setsockopt(sd,SOL_SOCKET,SO_REUSEADDR,&on,sizeof(on));
+  /* pregatirea structurilor de date */
+  bzero (&server, sizeof (server));
+  bzero (&from, sizeof (from));
+  /* umplem structura folosita de server */
+  /* stabilirea familiei de socket-uri */
+    server.sin_family = AF_INET;
+  /* acceptam orice adresa */
+    server.sin_addr.s_addr = htonl (INADDR_ANY);
+  /* utilizam un port utilizator */
+    server.sin_port = htons (PORT);
+  /* atasam socketul */
+  if (bind (sd, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1){
+      perror ("[server]Eroare la bind().\n");
+      return errno;
+    }
+  /* punem serverul sa asculte daca vin clienti sa se conecteze */
+  if (listen (sd, 2) == -1){
+      perror ("[server]Eroare la listen().\n");
+      return errno;
+    }
+  /* servim in mod concurent clientii...folosind thread-uri */
+  while (1){
+      int client;
+      thData * td; //parametru functiei executata de thread
+      socklen_t length = sizeof (from);
+      printf ("[server]Asteptam la portul %d...\n",PORT);
+      fflush (stdout);
+      /* acceptam un client (stare blocanta pina la realizarea conexiunii) */
+      if ( (client = accept (sd, (struct sockaddr *) &from, &length)) < 0){
+          perror ("[server]Eroare la accept().\n");
+          continue;
+        }
+        int idThread; //id-ul threadului
+        int cl; //descriptorul intors de accept
+        td=(struct thData*)malloc(sizeof(struct thData));
+        td->idThread=i++;
+        td->cl=client;
+        th=(pthread_t*) realloc(th,i*sizeof(pthread_t));
+        pthread_create(&th[i-1], NULL, &cumparator,td);
+        printf("descriptorul clientului este %d\n",client );
+        }
+}
+
